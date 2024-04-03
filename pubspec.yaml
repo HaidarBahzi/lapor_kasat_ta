@@ -1,0 +1,42 @@
+name: lapor_kasat
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.3.2 <4.0.0"
+
+dependencies:
+  carousel_slider: ^4.2.1
+  flutter:
+    sdk: flutter
+  flutter_smart_dialog: ^4.9.6
+  form_validator: ^2.1.1
+  get: ^4.6.6
+  get_storage: ^2.1.1
+  google_fonts: ^6.2.1
+  http: ^1.2.1
+  icons_launcher: ^2.1.7
+  persistent_bottom_nav_bar: ^5.0.2
+  shimmer: ^3.0.0
+  sqflite: ^2.3.3
+  uuid: ^4.3.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+
+icons_launcher:
+  image_path: "assets/ic_launcher.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
