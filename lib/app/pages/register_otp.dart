@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lapor_kasat/app/pages/register_first.dart';
 import 'package:lapor_kasat/app/pages/register_second.dart';
 
 class RegisterOTP extends StatefulWidget {
@@ -21,7 +20,7 @@ class _RegisterOTPState extends State<RegisterOTP> {
     _otpDigits = List.generate(6, (index) => '');
   }
 
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -65,15 +64,19 @@ class _RegisterOTPState extends State<RegisterOTP> {
                           color: Colors.white),
                     ),
                     const SizedBox(height: 25),
-                    Row(
+                   Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
                         6,
                         (index) => Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: SizedBox(
+                          child: Container(
                             width: 40,
                             height: 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             child: TextField(
                               onChanged: (value) {
                                 _otpDigits[index] = value;
@@ -88,31 +91,49 @@ class _RegisterOTPState extends State<RegisterOTP> {
                                   fontSize: 24, color: Colors.white),
                               decoration: const InputDecoration(
                                 counterText: '',
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.zero,
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 25),
-                    ElevatedButton(
-                        onPressed: () {
-                          Get.to(RegisterPage2());
-                        },
-                        child: Text("Verifikasi",style: TextStyle(fontSize: 17,color: Colors.white,fontWeight: FontWeight.bold),),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.lightBlue, 
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                    const SizedBox(height: 40),
+                    InkWell(
+                      onTap: () {
+                        // fungsi untuk kirim kode otp
+                        print("Mengirim ulang kode...");
+                      },
+                      child: Text(
+                        "Kirim kode lagi",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
+                    ),
+                    const SizedBox(height: 40),
+                    ElevatedButton(
+                      onPressed: () {
+                        Get.to(RegisterPage2());
+                      },
+                      child: Text(
+                        "Verifikasi",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 70),
+                        backgroundColor: Colors.lightBlue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -124,7 +145,7 @@ class _RegisterOTPState extends State<RegisterOTP> {
             child: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
-                Get.off(RegisterPage());
+                Get.back();
               },
               color: Colors.white,
             ),

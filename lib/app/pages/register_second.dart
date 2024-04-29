@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class RegisterPage2 extends StatefulWidget {
@@ -131,7 +132,8 @@ class _RegisterPage2State extends State<RegisterPage2> {
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
-  
+                 Get.back();
+                 print("test");
               },
               color: Colors.white,
             ),
