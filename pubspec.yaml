@@ -21,6 +21,7 @@ dependencies:
   shimmer: ^3.0.0
   sqflite: ^2.3.3
   uuid: ^4.3.3
+  image_picker: 
 
 dev_dependencies:
   flutter_test:
