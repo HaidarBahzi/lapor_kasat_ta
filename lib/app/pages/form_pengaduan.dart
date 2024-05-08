@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-
 
 class FormPengaduan extends StatefulWidget {
   const FormPengaduan({Key? key}) : super(key: key);
@@ -31,7 +31,138 @@ class _FormPengaduanState extends State<FormPengaduan> {
     }
   }
 
-  // func submit form
+    void _showSuccesPopup() {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          color: Colors.white,
+        ),
+        height: 429,
+        padding: EdgeInsets.all(40),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(Icons.close),
+                  iconSize: 25,
+                ),
+              ],
+            ),
+             Image.asset("assets/ic_succes.png",width: 100,height: 100,),
+            SizedBox(height: 10),
+            Text(
+              'Laporan Dikirim',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff00AADE), 
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Pengiriman laporan berhasil. Kami akan meninjau laporan anda.Terima kasih atas laporan Anda',
+              style: TextStyle(fontSize: 16,color: Color(0xffA39898)),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+  void _showConfirmationPopup() {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          color: Colors.white,
+        ),
+        height: 429,
+        padding: EdgeInsets.all(40),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(Icons.close),
+                  iconSize: 25,
+                ),
+              ],
+            ),
+             Image.asset("assets/ic_warning.png",width: 100,height: 100,),
+            SizedBox(height: 10),
+            Text(
+              'Pemberitahuan Konfirmasi',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff00AADE), 
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Laporan ini akan dikirimkan ke pusat untuk di proses',
+              style: TextStyle(fontSize: 16,color: Color(0xffA39898)),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+             Center(
+              child: SizedBox(
+                width: 240,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                    _showSuccesPopup();
+                  },
+                  child: Text(
+                    "Kirim",
+                    style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.lightBlue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+         
+          ],
+        ),
+      );
+    },
+  );
+}
+
+
   void _submitForm() {
     setState(() {
       _judulError = _judulController.text.isEmpty;
@@ -40,8 +171,12 @@ class _FormPengaduanState extends State<FormPengaduan> {
     });
 
     if (!_judulError && !_lokasiError && !_keteranganError && _image != null) {
-      // _submitForm()
+      _showConfirmationPopup();
     }
+  }
+
+  void _sendReport() {
+    // //func submit form
   }
 
   @override
@@ -139,11 +274,14 @@ class _FormPengaduanState extends State<FormPengaduan> {
                               size: 70,
                               color: Colors.grey,
                             ),
-                            SizedBox(height: 10,),
+                            SizedBox(height: 10),
                             Text(
                               "Silahkan foto / pilih dari galeri",
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16,color: Colors.grey),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Colors.grey),
                             )
                           ],
                         ),
@@ -188,33 +326,34 @@ class _FormPengaduanState extends State<FormPengaduan> {
   }
 
   Widget customTextField({
-  required TextEditingController controller,
-  required String hintText,
-  bool isError = false,
-  int? maxLines,
-  Widget? suffixIcon,
-}) {
-  return TextField(
-    controller: controller,
-    maxLines: maxLines,
-    decoration: InputDecoration(
-      contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 15.0),
-      hintText: isError ? 'Kolom ini harus diisi' : hintText,
-      prefixIcon: isError ? Icon(Icons.error_outline, color: Colors.red) : null,
-      suffixIcon: suffixIcon,
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: isError ? Colors.red : Color(0xff5189C4)),
-        borderRadius: BorderRadius.circular(10.0),
+    required TextEditingController controller,
+    required String hintText,
+    bool isError = false,
+    int? maxLines,
+    Widget? suffixIcon,
+  }) {
+    return TextField(
+      controller: controller,
+      maxLines: maxLines,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 15.0),
+        hintText: isError ? 'Kolom ini harus diisi' : hintText,
+        prefixIcon:
+            isError ? Icon(Icons.error_outline, color: Colors.red) : null,
+        suffixIcon: suffixIcon,
+        enabledBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(color: isError ? Colors.red : Color(0xff5189C4)),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue, width: 2.0),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        filled: true,
+        fillColor: Colors.white,
       ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.blue, width: 2.0),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      filled: true,
-      fillColor: Colors.white,
-    ),
-  );
-}
-
+    );
+  }
 }
 
