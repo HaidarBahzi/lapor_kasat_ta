@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lapor_kasat/app/controller/RegisterController.dart';
 import 'package:lapor_kasat/app/pages/register_second.dart';
 
 class RegisterOTP extends StatefulWidget {
@@ -13,6 +14,7 @@ class RegisterOTP extends StatefulWidget {
 
 class _RegisterOTPState extends State<RegisterOTP> {
   late List<String> _otpDigits;
+  final RegisterController registerController = Get.find();
 
   @override
   void initState() {
@@ -20,7 +22,7 @@ class _RegisterOTPState extends State<RegisterOTP> {
     _otpDigits = List.generate(6, (index) => '');
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -64,7 +66,7 @@ class _RegisterOTPState extends State<RegisterOTP> {
                           color: Colors.white),
                     ),
                     const SizedBox(height: 25),
-                   Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
                         6,
