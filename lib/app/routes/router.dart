@@ -8,4 +8,4 @@ class Routes {
   static const SPLASH = '/';
 }
 
-final router = [GetPage(name: Routes.SPLASH, page: () => const RegisterPage())];
+final router = [GetPage(name: Routes.SPLASH, page: () => const SplashScreen())];
